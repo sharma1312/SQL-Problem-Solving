@@ -1,0 +1,2 @@
+with d1 as (select c.id as custid, c.name as custname, o.id as orderid, o.customerid as custid2 from customers c left join orders o on c.id=o.customerid)
+select d1.custname as Customers from d1 where d1.orderid is null and d1.custid2 is null;

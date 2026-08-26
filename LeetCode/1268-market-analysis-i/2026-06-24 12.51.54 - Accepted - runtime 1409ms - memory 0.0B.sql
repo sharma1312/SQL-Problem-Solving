@@ -1,0 +1,2 @@
+with d1 as (select u.user_id, u.join_date, o.order_id, year(o.order_date) as yearr, o.buyer_id, o.seller_id from users u left join orders o on o.buyer_id=u.user_id)
+select d1.user_id as buyer_id, d1.join_date, sum(case when d1.yearr=2019 then 1 else 0 end) as orders_in_2019 from d1 group by d1.user_id, d1.join_date;

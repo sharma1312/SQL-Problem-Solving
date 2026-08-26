@@ -1,0 +1,2 @@
+with d1 as (select id, num, lead(num, 1) over(order by id ) as next, lead(num, 2) over(order by id) as nnext from logs)
+select distinct d1.num as ConsecutiveNums from d1 where num=next and next=nnext and num=next;
