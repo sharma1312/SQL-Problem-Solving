@@ -1,0 +1,1 @@
+select max(d.num) num from (select num , count(num) ct from mynumbers group by num having count(num)=1) d;
