@@ -1,0 +1,2 @@
+with d1 as(select employee_id, name, manager_id, salary, case when manager_id is null then "no manager" when manager_id in (select employee_id from employees) then "yes" else "left" end as status from employees where salary<30000)
+select employee_id from d1 where status="left" order by employee_id;
