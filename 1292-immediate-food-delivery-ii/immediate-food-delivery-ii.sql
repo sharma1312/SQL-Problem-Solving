@@ -1,0 +1,3 @@
+with d1 as (select delivery_id as did, customer_id as cid, order_date as odate, customer_pref_delivery_date as deldate, case when order_date=customer_pref_delivery_date then "immediate" else "scheduled" end as status, min(order_date) over(partition by customer_id) firstorders, case when order_date=min(order_date) over(partition by customer_id) then "firstorder" else "NA" end as first from delivery)
+
+select round((((select count(distinct cid) from d1 where status="immediate" and first="firstorder")*100)/(select count(distinct cid) as percent from d1)), 2) as immediate_percentage;
