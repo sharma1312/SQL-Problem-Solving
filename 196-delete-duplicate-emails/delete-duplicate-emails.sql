@@ -1,0 +1,1 @@
+delete from person where id in (select id from (select id,  row_number() over(partition by email order by id ) rn from person)d  where rn> 1);
