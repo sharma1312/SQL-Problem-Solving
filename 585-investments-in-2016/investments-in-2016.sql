@@ -1,0 +1,3 @@
+with d1 as (select i1.pid as id1, i2.pid id2, i1.tiv_2016 tiv2016_1, i2.tiv_2016 as tiv2016_2, i1.lat as lat1, i1.lon as lon1, i1.lat as lat2, i1.lon as lon2 from insurance i1 join insurance i2 on i1.tiv_2015=i2.tiv_2015 where i1.pid!=i2.pid and not exists (select 1 from insurance i3 where i3.lat=i1.lat and i3.lon=i1.lon and i3.pid!=i1.pid ))
+
+select round((sum(d2.tiv2016_1)), 2) as tiv_2016 from (select id1, max((tiv2016_1)) as tiv2016_1 from d1 group by id1)d2;
